@@ -4,7 +4,7 @@
 A gamification web application built with vanilla HTML, CSS, and JavaScript. The app turns daily habits into missions with an XP-based reward system, encouraging discipline through game design mechanics.
 
 ---
-
+video of the app: https://youtu.be/moxl_1BxUL4
 ## Description
 
 Disci-App is a habit-tracking tool inspired by gamification principles. Users can create missions (habits) with a name, description, and difficulty level. Completing missions awards XP, which accumulates toward a global rank that progresses through 12 tiers — from Mortal to Transcendent.
