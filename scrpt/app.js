@@ -1,15 +1,18 @@
 // ── ESTADO DE LA APP ────────────────────────────────────────
-var misiones = [];
-var contadorId = 0; // Para darle un ID único a cada misión
+let misiones = [];
+let contadorId = 0; // Para darle un ID único a cada misión
+let EXPcount= 0; // Contador de experiencia global
+
+
 
 
 // ── CREAR MISIÓN ────────────────────────────────────────────
 function crearMision() {
 
   // Leer el formulario
-  var nombre      = document.getElementById('mission-name').value;
-  var descripcion = document.getElementById('mission-desc').value;
-  var dificultad  = document.getElementById('mission-diff').value;
+  let nombre      = document.getElementById('mission-name').value;
+  let descripcion = document.getElementById('mission-desc').value;
+  let dificultad  = document.getElementById('mission-diff').value;
 
   // No admitir vacíos 
   if (nombre.trim() === '') {
@@ -18,7 +21,7 @@ function crearMision() {
   }
 
   // objeto mision
-  var mision = {
+  let mision = {
     id:          contadorId,
     nombre:      nombre,
     descripcion: descripcion,
@@ -49,9 +52,10 @@ function crearMision() {
 function completarMision(id) {
 
   // Buscar la misión en el array por su id
-  for (var i = 0; i < misiones.length; i++) {
+  for (let i = 0; i < misiones.length; i++) {
     if (misiones[i].id === id) {
       misiones[i].status = 'SUCCESSFUL';
+      actualizarEXP(misiones[i]);
       break; //encontrada 
     }
   }
@@ -66,7 +70,7 @@ function completarMision(id) {
 // Esta función borra y redibuja todas las tarjetas desde cero.
 // Se llama cada vez que el estado cambia.
 function renderLista() {
-  var lista = document.getElementById('mission-list');
+  let lista = document.getElementById('mission-list');
 
   // Limpiar el contenido actual
   lista.innerHTML = '';
@@ -82,20 +86,67 @@ function renderLista() {
   document.getElementById('mission-count').textContent = misiones.length + ' misiones';
 
   // Crear una tarjeta por cada misión en el array
-  for (var i = 0; i < misiones.length; i++) {
-    var card = crearTarjeta(misiones[i]);
+  for (let i = 0; i < misiones.length; i++) {
+    let card = crearTarjeta(misiones[i]);
     lista.appendChild(card);
   }
 }
 
+//  Actualizar exp y rango
+// Recibe la misión completada para saber cuánto XP sumar.
+function actualizarEXP(mision) {
+
+  // Sumar XP según la dificultad de la misión recibida
+  if (mision.dificultad === 'easy') {
+    EXPcount += 10;
+  } else if (mision.dificultad === 'normal') {
+    EXPcount += 25;
+  } else if (mision.dificultad === 'hard') {
+    EXPcount += 50;
+  }
+
+  // Actualizar el número en pantalla
+  document.getElementById('xp-total').textContent = EXPcount;
+
+  // Decidir el rango según el XP acumulado
+  var rango;
+  if (EXPcount === 0) {
+    rango = 'Novice';
+  } else if (EXPcount <= 30) {
+    rango = 'Adept';
+  } else if (EXPcount <= 60) {
+    rango = 'Disciple';
+  } else if (EXPcount <= 100) {
+    rango = 'Warden';
+  } else if (EXPcount <= 150) {
+    rango = 'Sentinel';
+  } else if (EXPcount <= 210) {
+    rango = 'Vanguard';
+  } else if (EXPcount <= 280) {
+    rango = 'Invoker';
+  } else if (EXPcount <= 360) {
+    rango = 'Mystic';
+  } else if (EXPcount <= 450) {
+    rango = 'Warlock';
+  } else if (EXPcount <= 550) {
+    rango = 'Sorcerer';
+  } else if (EXPcount <= 700) {
+    rango = 'Champion';
+  } else {
+    rango = 'Overseer';
+  }
+
+  // Mostrar el rango en pantalla
+  document.getElementById('rank-label').textContent = rango;
+}
 
 // Crear tabla
 // Recibe un objeto misión y devuelve un elemento HTML <div>.
 function crearTarjeta(mision) {
-  var diffNames = { easy: 'Fácil', normal: 'Normal', hard: 'Difícil' };
+  let diffNames = { easy: 'Fácil', normal: 'Normal', hard: 'Difícil' };
 
   // Crear el elemento div
-  var card = document.createElement('div');
+  let card = document.createElement('div');
   card.classList.add('mission-card');
 
   // Si está completada, agregar la clase visual "done"
