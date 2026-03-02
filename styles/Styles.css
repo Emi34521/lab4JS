@@ -1,0 +1,168 @@
+/* ── Variables ── */
+:root {
+  --color-fondo:       #f5f5f5;
+  --color-superficie:  #ffffff;
+  --color-borde:       #ddd;
+  --color-acento:      #4a90e2;
+  --color-exito:       #27ae60;
+  --color-texto:       #333;
+  --color-suave:       #888;
+  --radio:             8px;
+}
+
+/* ── Reset básico ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ── Contenedor principal ── */
+.contenedor {
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 0 1rem 4rem;
+}
+
+/* ── Encabezado ── */
+h1 { font-size: 1.8rem; margin-bottom: .25rem; }
+.subtitulo { color: var(--color-suave); margin-bottom: 1.5rem; }
+h2 { font-size: 1.1rem; margin-bottom: .75rem; }
+
+/* ── Panel de XP ── */
+.xp-panel {
+  background: var(--color-acento);
+  color: #fff;
+  border-radius: var(--radio);
+  padding: .9rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+/* ── Formulario ── */
+.formulario {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.formulario h2 { margin-bottom: 1rem; }
+
+label {
+  display: block;
+  font-size: .85rem;
+  color: var(--color-suave);
+  margin-bottom: .25rem;
+  margin-top: .75rem;
+}
+
+label:first-of-type { margin-top: 0; }
+
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: .5rem .75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  font-size: .95rem;
+  font-family: sans-serif;
+  outline: none;
+  transition: border-color .2s;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus { border-color: var(--color-acento); }
+
+textarea { min-height: 70px; resize: vertical; }
+
+button {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: .65rem;
+  background: var(--color-acento);
+  color: #fff;
+  border: none;
+  border-radius: var(--radio);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover { opacity: .9; }
+
+/* ── Lista de misiones ── */
+#mission-count { color: var(--color-suave); font-size: .85rem; margin-bottom: .75rem; }
+#mission-list { display: flex; flex-direction: column; gap: .75rem; }
+#empty-state { color: var(--color-suave); font-style: italic; }
+
+/* ── Tarjeta de misión ── */
+.mission-card {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1rem 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.mission-card.done { border-color: var(--color-exito); opacity: .7; }
+.mission-card.done .mission-nombre { text-decoration: line-through; color: var(--color-suave); }
+
+.mission-nombre { font-weight: bold; margin-bottom: .2rem; }
+.mission-desc { font-size: .88rem; color: var(--color-suave); margin-bottom: .4rem; }
+.mission-meta { font-size: .8rem; display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+
+.badge-dificultad {
+  padding: .15rem .5rem;
+  border-radius: 4px;
+  font-size: .75rem;
+  font-weight: bold;
+}
+.badge-dificultad.easy   { background: #d4edda; color: #155724; }
+.badge-dificultad.normal { background: #fff3cd; color: #856404; }
+.badge-dificultad.hard   { background: #f8d7da; color: #721c24; }
+
+.mission-status { font-size: .8rem; font-weight: bold; }
+.mission-status.pending    { color: var(--color-suave); }
+.mission-status.successful { color: var(--color-exito); }
+
+.btn-completar {
+  width: auto;
+  margin-top: 0;
+  padding: .4rem .9rem;
+  font-size: .85rem;
+  background: var(--color-exito);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-completar:disabled { background: var(--color-borde); color: var(--color-suave); cursor: not-allowed; }
+
+/* ── Toast ── */
+#toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(60px);
+  background: #333;
+  color: #fff;
+  padding: .6rem 1.4rem;
+  border-radius: 99px;
+  font-size: .9rem;
+  transition: transform .3s ease;
+  pointer-events: none;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }

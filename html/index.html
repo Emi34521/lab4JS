@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Disci-App</title>
+  <link rel="stylesheet" href="../styles/Styles.css"/>
+</head>
+<body>
+
+  <div class="contenedor">
+
+    <h1> Disci-App</h1>
+    <p class="subtitulo">Convierte tus hábitos en misiones y gana XP.</p>
+
+    <!-- Panel de XP -->
+    <div class="xp-panel">
+      <span>XP Total: <strong id="xp-total">0</strong></span>
+      <span id="rank-label"> Novice</span>
+    </div>
+
+    <!-- Formulario -->
+    <div class="formulario">
+      <h2>Nueva Misión</h2>
+
+      <label for="mission-name">Nombre</label>
+      <input type="text" id="mission-name" placeholder="Ej: Leer 30 minutos"/>
+
+      <label for="mission-desc">Descripción</label>
+      <textarea id="mission-desc" placeholder="¿En qué consiste este hábito?"></textarea>
+
+      <label for="mission-diff">Dificultad</label>
+      <select id="mission-diff">
+        <option value="easy">Fácil — 10 XP</option>
+        <option value="normal" selected>Normal — 25 XP</option>
+        <option value="hard">Difícil — 50 XP</option>
+      </select>
+
+      <button onclick="crearMision()">Agregar misión</button>
+    </div>
+
+    <!-- Lista de misiones -->
+    <h2>Misiones</h2>
+    <p id="mission-count">0 misiones</p>
+
+    <div id="mission-list">
+      <p id="empty-state">Aún no tienes misiones. ¡Crea una para comenzar!</p>
+    </div>
+
+  </div>
+
+  <div id="toast"></div>
+
+</body>
+</html>
